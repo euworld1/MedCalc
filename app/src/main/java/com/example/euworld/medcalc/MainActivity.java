@@ -2,6 +2,7 @@ package com.example.euworld.medcalc;
 
 // test change
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+//field variable
 
 
     private static final double ATROETTDOSE = .01;//global variables Instance VAriables
@@ -72,17 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected", Toast.LENGTH_LONG).show();
 
                EditText babyMass = (EditText) findViewById(R.id.babyMass);
-                String bMass = babyMass.getText().toString();
-                Log.d("sdfsdf", babyMass.toString());
+                // double bMass = Double.parseDouble(babyMass.getText().toString());
 
-
-
-
+                Log.i("status", "babyMass.toString() ");
 
                 switch (position) {
                     case 0:
                         t.setText("");
-                        getAtroDose();
+                        //getAtroDose(bMass);
                        break;
                     case 1:
                         t.setText("");
@@ -244,10 +242,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            private double getAtroDose() {
+            private double getAtroDose(double bMass) {
                 t.setText("");
-                t.append("Atro dose is " + ATROETTDOSE * 1000);
-                return ATROETTDOSE * 1000;
+                t.append("Atro Dose is " + bMass * ATROETTDOSE);
+                return bMass;
+
             }
 
 
