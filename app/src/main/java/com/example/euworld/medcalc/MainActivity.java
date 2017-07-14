@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.math.BigDecimal;
+
+import static com.example.euworld.medcalc.R.id.babyMass;
+//import java.math.BigDecimal;
 
 //git test
 
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 //field variable
 
 
-    private static final double ATROETTDOSE = .01;//global variables Instance VAriables
+    private static final double ATROETTDOSE = 1;//global variables Instance VAriables
     private static final double CACLDOSE = 20;
     private static final double CAGLDOSE = 200;
     private final double DEXIVDOSE = 100;
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -68,19 +72,55 @@ public class MainActivity extends AppCompatActivity {
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {  //interface
+
                 Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected", Toast.LENGTH_LONG).show();
 
                EditText babyMass = (EditText) findViewById(R.id.babyMass);
-                // double bMass = Double.parseDouble(babyMass.getText().toString());
+                // double doubleBabyMass = Double.parseDouble(babyMass.getText().toString());
 
+
+                double bMass;
+                try
+                {
+                    bMass = Double.parseDouble(babyMass.getText().toString());
+                }
+                catch (NumberFormatException e)
+                {
+
+
+                    Log.i("status", "There is no value of bMass");
+
+
+                    return;
+
+
+
+                }
+
+                // String sts = bMass;
                 Log.i("status", "babyMass.toString() ");
+                Log.i("status", babyMass.getText().toString());
+                Log.i("dfc", "");
+
+
+
+
+
+
+               // Log.i("status", babyMass.toString());
+
+
 
                 switch (position) {
                     case 0:
-                        t.setText("");
-                        //getAtroDose(bMass);
+                       clearscn();
+                       t.append("Atro Dose will be : " + getAtroDose(bMass));
+                        Log.i("status", "did it");
                        break;
                     case 1:
                         t.setText("");
@@ -243,16 +283,25 @@ public class MainActivity extends AppCompatActivity {
             }
 
             private double getAtroDose(double bMass) {
-                t.setText("");
-                t.append("Atro Dose is " + bMass * ATROETTDOSE);
-                return bMass;
+                clearscn();
+                //t.append("Atro Dose is " + bMass * ATROETTDOSE);
+                //Log.i("getAtroDose", babyMass);
+                return bMass * ATROETTDOSE;
 
+
+            }
+
+            private void clearscn() {
+                t.setText("");;
             }
 
 
 
 
         });
+    }
+
+    private void clearscn() {
     }
 
 
